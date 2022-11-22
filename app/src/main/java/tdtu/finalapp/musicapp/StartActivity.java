@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import tdtu.finalapp.musicapp.loginAndRegis.AddAccount;
+import tdtu.finalapp.musicapp.loginAndRegis.LoginActivity;
 
 public class StartActivity extends AppCompatActivity {
 
@@ -19,6 +20,7 @@ public class StartActivity extends AppCompatActivity {
             @Override
             public void run() {
                 startActivity(new Intent(StartActivity.this, AddAccount.class));
+//                startActivity(new Intent(StartActivity.this, LoginActivity.class));
                 finish();
             }
         },1500);
