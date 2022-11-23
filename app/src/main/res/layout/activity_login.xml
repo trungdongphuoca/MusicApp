@@ -110,7 +110,7 @@
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:textColor="#0E0A0A"
-            android:text="Sign in"
+            android:text="Sign up"
             android:id="@+id/signupBtn"
 
             />

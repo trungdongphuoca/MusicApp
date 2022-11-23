@@ -6,6 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import tdtu.finalapp.musicapp.loginAndRegis.AddAccount;
 import tdtu.finalapp.musicapp.loginAndRegis.LoginActivity;
 
@@ -19,8 +22,15 @@ public class StartActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                startActivity(new Intent(StartActivity.this, AddAccount.class));
-//                startActivity(new Intent(StartActivity.this, LoginActivity.class));
+                FirebaseUser UserIsSigned = FirebaseAuth.getInstance().getCurrentUser();
+
+                if(UserIsSigned == null){
+                    startActivity(new Intent(StartActivity.this, LoginActivity.class));
+                }
+                else{
+                    startActivity(new Intent(StartActivity.this, MainActivity.class));
+                }
+
                 finish();
             }
         },1500);

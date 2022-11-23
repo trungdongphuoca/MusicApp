@@ -3,6 +3,7 @@ package tdtu.finalapp.musicapp.loginAndRegis;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
@@ -46,7 +47,7 @@ public class AddAccount extends AppCompatActivity {
             }
         });
 
-        tx.setOnClickListener(tv -> finish());
+        tx.setOnClickListener(tv -> startActivity(new Intent(AddAccount.this, LoginActivity.class)));
     }
 
     void createAccount(){
