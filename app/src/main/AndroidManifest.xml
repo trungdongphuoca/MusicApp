@@ -19,7 +19,7 @@
             android:name=".loginAndRegis.AddAccount"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".MainPackage.MainActivity"
             android:exported="false" />
         <activity
             android:name=".StartActivity"

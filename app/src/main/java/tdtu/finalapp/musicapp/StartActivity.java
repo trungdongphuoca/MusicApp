@@ -9,7 +9,7 @@ import android.os.Handler;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import tdtu.finalapp.musicapp.loginAndRegis.AddAccount;
+import tdtu.finalapp.musicapp.MainPackage.MainActivity;
 import tdtu.finalapp.musicapp.loginAndRegis.LoginActivity;
 
 public class StartActivity extends AppCompatActivity {
