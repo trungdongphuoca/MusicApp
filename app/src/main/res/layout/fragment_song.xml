@@ -6,9 +6,39 @@
     tools:context=".Fragment.SongFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Song" />
+   <RelativeLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent">
+
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:textColor="@color/black"
+           android:text="---Song---"
+           android:textSize="25dp"
+           android:textStyle="bold"
+           android:padding="10dp"
+           android:layout_centerHorizontal="true"
+           android:id="@+id/songsText"
+           />
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="No song in phone"
+           android:id="@+id/noSongText"
+           android:layout_centerHorizontal="true"
+           android:visibility="gone"
+           />
+
+       <androidx.recyclerview.widget.RecyclerView
+           android:id="@+id/RecycleViewSong"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_below="@+id/songsText"
+            tools:listitem="@layout/list_songs"
+           />
+
+
+   </RelativeLayout>
 
 </FrameLayout>
