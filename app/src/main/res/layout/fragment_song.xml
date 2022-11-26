@@ -11,16 +11,15 @@
        android:layout_height="match_parent">
 
        <TextView
+           android:id="@+id/songsText"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
-           android:textColor="@color/black"
-           android:text="---Song---"
-           android:textSize="25dp"
-           android:textStyle="bold"
-           android:padding="10dp"
            android:layout_centerHorizontal="true"
-           android:id="@+id/songsText"
-           />
+           android:padding="10dp"
+           android:text="---Song---"
+           android:textColor="@color/black"
+           android:textSize="25dp"
+           android:textStyle="bold" />
        <TextView
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
@@ -35,8 +34,7 @@
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
            android:layout_below="@+id/songsText"
-            tools:listitem="@layout/list_songs"
-           />
+           tools:listitem="@layout/list_songs" />
 
 
    </RelativeLayout>
