@@ -23,7 +23,7 @@
        <TextView
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
-           android:text="No song in phone"
+           android:text="No song to display"
            android:id="@+id/noSongText"
            android:layout_centerHorizontal="true"
            android:visibility="gone"
