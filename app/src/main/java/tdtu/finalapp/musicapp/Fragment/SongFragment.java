@@ -159,4 +159,12 @@ public class SongFragment extends Fragment {
                     new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
                     101);
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(recycleView!=null){
+            recycleView.setAdapter(new AdapterSong(getActivity().getApplicationContext(),SongsArrayList));
+        }
+    }
 }

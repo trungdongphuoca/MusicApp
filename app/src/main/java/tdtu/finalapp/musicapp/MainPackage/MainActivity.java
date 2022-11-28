@@ -7,25 +7,62 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
+
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
+import android.widget.ImageView;
+import android.widget.PopupMenu;
 
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 
 import tdtu.finalapp.musicapp.Fragment.HomeFragment;
 import tdtu.finalapp.musicapp.Fragment.LibraryFragment;
 import tdtu.finalapp.musicapp.Fragment.SongFragment;
+import tdtu.finalapp.musicapp.PlayMusic.PlayMusicActivity;
 import tdtu.finalapp.musicapp.R;
+import tdtu.finalapp.musicapp.Toast.ToastNotification;
+import tdtu.finalapp.musicapp.loginAndRegis.LoginActivity;
 
 public class MainActivity extends AppCompatActivity {
-
+    private ImageView userImg,searchImg;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        searchImg = findViewById(R.id.SearchBtn);
+        userImg = findViewById(R.id.UserBtn);
         initViewPage();
+
+        userImg.setOnClickListener(v->showUser());
+    }
+    void showUser(){
+        PopupMenu popupMenu = new PopupMenu(MainActivity.this,userImg);
+        popupMenu.getMenu().add("See your profile");
+        popupMenu.getMenu().add("Sign out");
+        popupMenu.show();
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                if(menuItem.getTitle().equals("Sign out")){
+                    FirebaseAuth.getInstance().signOut();
+                    ToastNotification.makeTextToShow(MainActivity.this,"Sign out successful");
+                    startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                    finish();
+                    return true;
+                }
+                if(menuItem.getTitle().equals("See your profile")){
+                    ToastNotification.makeTextToShow(MainActivity.this,"Your profile will present now!!");
+//                    startActivity(new Intent(MainActivity.this, LoginActivity.class));
+//                    finish();
+                    return true;
+                }
+                return false;
+            }
+        });
     }
 
     private void initViewPage() {

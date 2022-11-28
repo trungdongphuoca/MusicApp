@@ -3,24 +3,31 @@ package tdtu.finalapp.musicapp.PlayMusic;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
+import tdtu.finalapp.musicapp.Fragment.SongFragment;
+import tdtu.finalapp.musicapp.MainPackage.MainActivity;
 import tdtu.finalapp.musicapp.Model.Song;
 import tdtu.finalapp.musicapp.R;
+import tdtu.finalapp.musicapp.Toast.ToastNotification;
 
 public class PlayMusicActivity extends AppCompatActivity {
     private TextView titleTv,currentTimeTv,totalTimeTv;
     private SeekBar seekBar;
-    private ImageView pausePlay,nextBtn,previousBtn,musicIcon;
+    private ImageView pausePlay,nextBtn,previousBtn,musicIcon,backIcon,menuIcon;
     private ArrayList<Song> songsList;
     private Song currentSong;
     private MediaPlayer mediaPlayer = MyMediaPlayer.getInstance();
@@ -39,6 +46,9 @@ public class PlayMusicActivity extends AppCompatActivity {
         nextBtn = findViewById(R.id.next);
         previousBtn = findViewById(R.id.previous);
         musicIcon = findViewById(R.id.music_icon_big);
+        backIcon = findViewById(R.id.backInPlayMusic);
+        menuIcon= findViewById(R.id.MenuInPlayMusic);
+
 
         titleTv.setSelected(true);
 
@@ -83,7 +93,26 @@ public class PlayMusicActivity extends AppCompatActivity {
 
             }
         });
+
+        menuIcon.setOnClickListener(v->showMenu());
+        backIcon.setOnClickListener(v-> startActivity(new Intent(PlayMusicActivity.this, MainActivity.class)));
     }
+    void showMenu(){
+        PopupMenu popupMenu = new PopupMenu(PlayMusicActivity.this,menuIcon);
+        popupMenu.getMenu().add("add to playlist");
+        popupMenu.show();
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                if(menuItem.getTitle().equals("add to playlist")){
+                    ToastNotification.makeTextToShow(PlayMusicActivity.this,"add the playlist has been clicked");
+                    return true;
+                }
+                return false;
+            }
+        });
+    }
+
     ////set name and total time of song, some events play pause next previous
     void setResourcesWithMusic(){
         currentSong = songsList.get(MyMediaPlayer.currentIndex);

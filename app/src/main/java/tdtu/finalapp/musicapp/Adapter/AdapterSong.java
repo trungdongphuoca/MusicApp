@@ -2,6 +2,7 @@ package tdtu.finalapp.musicapp.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,11 +42,11 @@ public class AdapterSong extends RecyclerView.Adapter<AdapterSong.ViewHolderSong
         Song s = songsArraylist.get(position);
         holder.titleSong.setText(s.getTitle());
 
-//        if(MyMediaplayer.currentIndex==position){
-//            holder.titleSong.setTextColor(Color.parseColor("#FF0000"));
-//        }else{
-//            holder.titleSong.setTextColor(Color.parseColor("#000000"));
-//        }
+        if(MyMediaPlayer.currentIndex==position){
+            holder.titleSong.setTextColor(Color.parseColor("#FFA85CB5"));
+        }else{
+            holder.titleSong.setTextColor(Color.parseColor("#000000"));
+        }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -25,6 +25,9 @@
             android:name=".loginAndRegis.LoginActivity"
             android:exported="false" />
         <activity
+            android:name=".Fragment.SongFragment"
+            android:exported="true" />
+        <activity
             android:name=".loginAndRegis.AddAccount"
             android:exported="false" />
         <activity

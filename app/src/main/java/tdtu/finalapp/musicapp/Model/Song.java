@@ -2,6 +2,7 @@ package tdtu.finalapp.musicapp.Model;
 
 import java.io.Serializable;
 
+
 public class Song implements Serializable {
     private String path;
     private String title;
