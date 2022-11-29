@@ -1,5 +1,6 @@
 package tdtu.finalapp.musicapp.PlayMusic;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
@@ -97,6 +98,7 @@ public class PlayMusicActivity extends AppCompatActivity {
         menuIcon.setOnClickListener(v->showMenu());
         backIcon.setOnClickListener(v-> startActivity(new Intent(PlayMusicActivity.this, MainActivity.class)));
     }
+
     void showMenu(){
         PopupMenu popupMenu = new PopupMenu(PlayMusicActivity.this,menuIcon);
         popupMenu.getMenu().add("add to playlist");

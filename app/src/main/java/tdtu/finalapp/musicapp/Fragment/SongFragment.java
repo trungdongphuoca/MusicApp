@@ -96,19 +96,11 @@ public class SongFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         recycleView  =view.findViewById(R.id.RecycleViewSong);
         noSong = view.findViewById(R.id.noSongText);
 
         dataInitialize();
-
-
-
-
-/*        recycleView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recycleView.setHasFixedSize(true);
-        AdapterSong adapterSong = new AdapterSong(getContext(),SongsArrayList);
-        recycleView.setAdapter(adapterSong);
-        adapterSong.notifyDataSetChanged();*/ // add into recycleView
     }
 
 

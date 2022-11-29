@@ -43,19 +43,25 @@ public class MainActivity extends AppCompatActivity {
         PopupMenu popupMenu = new PopupMenu(MainActivity.this,userImg);
         popupMenu.getMenu().add("See your profile");
         popupMenu.getMenu().add("Sign out");
+        popupMenu.getMenu().add("Exit");
         popupMenu.show();
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
-                if(menuItem.getTitle().equals("Sign out")){
+                CharSequence title = menuItem.getTitle();
+                if ("Sign out".equals(title)) {
                     FirebaseAuth.getInstance().signOut();
-                    ToastNotification.makeTextToShow(MainActivity.this,"Sign out successful");
+                    ToastNotification.makeTextToShow(MainActivity.this, "Sign out successful");
                     startActivity(new Intent(MainActivity.this, LoginActivity.class));
                     finish();
                     return true;
-                }
-                if(menuItem.getTitle().equals("See your profile")){
-                    ToastNotification.makeTextToShow(MainActivity.this,"Your profile will present now!!");
+                } else if ("See your profile".equals(title)) {
+                    ToastNotification.makeTextToShow(MainActivity.this, "Your profile will present now!!");
+//                    startActivity(new Intent(MainActivity.this, LoginActivity.class));
+//                    finish();
+                    return true;
+                } else if ("Exit".equals(title)) {
+                    ToastNotification.makeTextToShow(MainActivity.this, "Exit app");
 //                    startActivity(new Intent(MainActivity.this, LoginActivity.class));
 //                    finish();
                     return true;
@@ -70,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
         TabLayout tabLayout = findViewById(R.id.tab_layout);
 
         ViewPageAdapter viewPageAdapter = new ViewPageAdapter(getSupportFragmentManager());
-        viewPageAdapter.addFragments(new HomeFragment(),"Home");
+//        viewPageAdapter.addFragments(new HomeFragment(),"Home");
         viewPageAdapter.addFragments(new SongFragment(),"Song");
         viewPageAdapter.addFragments(new LibraryFragment(),"Library");
         viewPager.setAdapter(viewPageAdapter);
