@@ -9,6 +9,7 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.SeekBar;
@@ -17,6 +18,10 @@ import android.widget.Toast;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import tdtu.finalapp.musicapp.Fragment.SongFragment;
@@ -33,7 +38,12 @@ public class PlayMusicActivity extends AppCompatActivity {
     private Song currentSong;
     private MediaPlayer mediaPlayer = MyMediaPlayer.getInstance();
     private int x=0;
+
+
     private ImageView randomBtn,repeatBtn;
+    boolean checkRandom = false;
+    boolean checkRepeat = false;
+    private Random random = new Random();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,10 +63,17 @@ public class PlayMusicActivity extends AppCompatActivity {
         backIcon = findViewById(R.id.backInPlayMusic);
         menuIcon= findViewById(R.id.MenuInPlayMusic);
 
-
+//        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+//            @Override
+//            public void onCompletion(MediaPlayer mediaPlayer) {
+//                nextBtn.performClick();
+//            }
+//        });
         titleTv.setSelected(true);
 
         songsList = (ArrayList<Song>) getIntent().getSerializableExtra("LIST_SONG");
+
+
 
         setResourcesWithMusic();
 
@@ -75,6 +92,7 @@ public class PlayMusicActivity extends AppCompatActivity {
                         pausePlay.setImageResource(R.drawable.ic_baseline_play_arrow_24);
                         musicIcon.setRotation(x);
                     }
+
 
                 }
                 new Handler().postDelayed(this,100);
@@ -134,7 +152,7 @@ public class PlayMusicActivity extends AppCompatActivity {
 
 
         randomBtn.setOnClickListener(v->randomSong());
-        repeatBtn.setOnClickListener(v->RepeatAgainSong());
+        repeatBtn.setOnClickListener(v->repeatSong());
 
 
         playMusic();
@@ -142,11 +160,6 @@ public class PlayMusicActivity extends AppCompatActivity {
 
     }
 
-    private void RepeatAgainSong() {
-    }
-
-    private void randomSong() {
-    }
 
     private void playMusic(){
 
@@ -165,20 +178,39 @@ public class PlayMusicActivity extends AppCompatActivity {
     }
 
     private void playNextSong(){
+        int tmpIndex =MyMediaPlayer.currentIndex;
         x = 0;
         if(MyMediaPlayer.currentIndex== songsList.size()-1)
             MyMediaPlayer.currentIndex = -1;
-        MyMediaPlayer.currentIndex +=1;
+
+        if(checkRandom && !checkRepeat) {
+            MyMediaPlayer.currentIndex = random.nextInt(songsList.size());
+        }
+        else if(!checkRandom && checkRepeat){
+            MyMediaPlayer.currentIndex = tmpIndex;
+        }
+        else
+            MyMediaPlayer.currentIndex +=1;
+
         mediaPlayer.reset();
         setResourcesWithMusic();
 
     }
 
     private void playPreviousSong(){
+        int tmpIndex =MyMediaPlayer.currentIndex;
         x = 0;
         if(MyMediaPlayer.currentIndex== 0)
             MyMediaPlayer.currentIndex = songsList.size();
-        MyMediaPlayer.currentIndex -=1;
+
+        if(checkRandom && !checkRepeat) {
+            MyMediaPlayer.currentIndex = random.nextInt(songsList.size());
+        }
+        else if(!checkRandom && checkRepeat){
+            MyMediaPlayer.currentIndex = tmpIndex;
+        }else
+            MyMediaPlayer.currentIndex -=1;
+
         mediaPlayer.reset();
         setResourcesWithMusic();
     }
@@ -196,4 +228,35 @@ public class PlayMusicActivity extends AppCompatActivity {
                 TimeUnit.MILLISECONDS.toMinutes(millis) % TimeUnit.HOURS.toMinutes(1),
                 TimeUnit.MILLISECONDS.toSeconds(millis) % TimeUnit.MINUTES.toSeconds(1));
     }
+
+
+    public void repeatSong(){
+        checkRepeat = !checkRepeat;
+        if(checkRepeat){
+            repeatBtn.setImageResource(R.drawable.ic_baseline_repeat_one_edit_24);
+        }
+        else{
+            repeatBtn.setImageResource(R.drawable.ic_baseline_repeat_one_24);
+        }
+
+    }
+
+    public void randomSong(){
+        checkRandom = !checkRandom;
+        if(checkRandom){
+            randomBtn.setImageResource(R.drawable.ic_baseline_shuffle_edit_24);
+        }
+        else{
+            randomBtn.setImageResource(R.drawable.ic_baseline_shuffle_24);
+        }
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        checkRandom = false;
+        checkRepeat = false;
+    }
+
 }
