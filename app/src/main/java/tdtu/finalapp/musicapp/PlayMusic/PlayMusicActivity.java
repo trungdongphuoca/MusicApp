@@ -33,6 +33,7 @@ public class PlayMusicActivity extends AppCompatActivity {
     private Song currentSong;
     private MediaPlayer mediaPlayer = MyMediaPlayer.getInstance();
     private int x=0;
+    private ImageView randomBtn,repeatBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +47,8 @@ public class PlayMusicActivity extends AppCompatActivity {
         pausePlay = findViewById(R.id.pause_play);
         nextBtn = findViewById(R.id.next);
         previousBtn = findViewById(R.id.previous);
+        randomBtn = findViewById(R.id.random);
+        repeatBtn = findViewById(R.id.repeat);
         musicIcon = findViewById(R.id.music_icon_big);
         backIcon = findViewById(R.id.backInPlayMusic);
         menuIcon= findViewById(R.id.MenuInPlayMusic);
@@ -56,6 +59,8 @@ public class PlayMusicActivity extends AppCompatActivity {
         songsList = (ArrayList<Song>) getIntent().getSerializableExtra("LIST_SONG");
 
         setResourcesWithMusic();
+
+
         PlayMusicActivity.this.runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -127,9 +132,20 @@ public class PlayMusicActivity extends AppCompatActivity {
         nextBtn.setOnClickListener(v-> playNextSong());
         previousBtn.setOnClickListener(v-> playPreviousSong());
 
+
+        randomBtn.setOnClickListener(v->randomSong());
+        repeatBtn.setOnClickListener(v->RepeatAgainSong());
+
+
         playMusic();
 
 
+    }
+
+    private void RepeatAgainSong() {
+    }
+
+    private void randomSong() {
     }
 
     private void playMusic(){

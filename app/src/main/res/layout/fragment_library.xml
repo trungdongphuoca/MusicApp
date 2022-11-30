@@ -51,6 +51,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:text="Playlists"
+                android:id="@+id/PlaylistTV"
                 android:textColor="#170606"
                 android:textSize="25dp"
                 android:textStyle="bold" />
