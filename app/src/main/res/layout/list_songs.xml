@@ -10,7 +10,7 @@
     android:background="@color/white"
     android:foreground="?android:attr/selectableItemBackground">
 
-    <com.google.android.material.imageview.ShapeableImageView
+    <ImageView
         android:id="@+id/image_Song"
         android:layout_width="60dp"
         android:layout_height="60dp"

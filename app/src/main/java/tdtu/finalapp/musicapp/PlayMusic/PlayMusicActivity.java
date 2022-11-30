@@ -63,12 +63,16 @@ public class PlayMusicActivity extends AppCompatActivity {
         backIcon = findViewById(R.id.backInPlayMusic);
         menuIcon= findViewById(R.id.MenuInPlayMusic);
 
+
+        //auto next song when current song finish -> but it has some error
 //        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
 //            @Override
 //            public void onCompletion(MediaPlayer mediaPlayer) {
 //                nextBtn.performClick();
 //            }
 //        });
+
+
         titleTv.setSelected(true);
 
         songsList = (ArrayList<Song>) getIntent().getSerializableExtra("LIST_SONG");

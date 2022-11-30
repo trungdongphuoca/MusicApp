@@ -34,26 +34,17 @@
         tools:ignore="MissingConstraints">
 
         <TextView
-            android:id="@+id/nameSong"
+            android:id="@+id/name_playlist"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="0dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
 
             android:text="Playlist 1"
             android:textColor="#CFC8C8"
             android:textSize="20dp"
             android:textStyle="bold" />
-        <TextView
-            android:id="@+id/totalSong"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="0dp"
-            android:text="59 songs"
-            android:textColor="#989494"
-            android:textSize="15dp"
-            android:textStyle="bold" />
+
     </LinearLayout>
 
     <ImageView
@@ -71,6 +62,6 @@
         android:layout_height="3dp"
         android:layout_margin="8dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/image_Song"
+        app:layout_constraintTop_toBottomOf="@id/image_playlist"
         android:background="@color/black"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -52,7 +52,6 @@ public class SongFragment extends Fragment {
     private ArrayList<Song> SongsArrayList =new ArrayList<>();
 
 
-
     public SongFragment() {
         // Required empty public constructor
     }

@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -47,14 +48,14 @@ public class AdapterSong extends RecyclerView.Adapter<AdapterSong.ViewHolderSong
         }else{
             holder.titleSong.setTextColor(Color.parseColor("#000000"));
         }
-
+        int fake = position;
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //navigate to another acitivty
 
                 MyMediaPlayer.getInstance().reset();
-                MyMediaPlayer.currentIndex = position;
+                MyMediaPlayer.currentIndex = fake;
                 Intent intent = new Intent(context, PlayMusicActivity.class);
                 intent.putExtra("LIST_SONG",songsArraylist);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -71,7 +72,7 @@ public class AdapterSong extends RecyclerView.Adapter<AdapterSong.ViewHolderSong
 
     public class ViewHolderSong extends RecyclerView.ViewHolder{
 
-        ShapeableImageView imgSong;
+        ImageView imgSong;
         TextView titleSong;
 
         public ViewHolderSong(@NonNull View itemView) {
