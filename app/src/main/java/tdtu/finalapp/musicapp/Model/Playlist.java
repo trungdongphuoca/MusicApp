@@ -1,8 +1,13 @@
 package tdtu.finalapp.musicapp.Model;
 
+import com.google.firebase.database.Exclude;
+
+import java.io.Serializable;
 import java.util.List;
 
-public class Playlist {
+public class Playlist implements Serializable {
+    @Exclude  // not add "key" property into firebase
+    private String key;
     private String title;
     private List<String> listSong;
 
@@ -12,6 +17,14 @@ public class Playlist {
     public Playlist(String title, List<String> listSong) {
         this.title = title;
         this.listSong = listSong;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 
     public String getName() {

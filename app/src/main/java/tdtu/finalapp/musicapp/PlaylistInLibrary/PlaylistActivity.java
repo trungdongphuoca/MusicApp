@@ -20,7 +20,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import tdtu.finalapp.musicapp.Adapter.AdapterPlaylist;
-import tdtu.finalapp.musicapp.Adapter.AdapterSong;
 import tdtu.finalapp.musicapp.Model.Playlist;
 import tdtu.finalapp.musicapp.R;
 import tdtu.finalapp.musicapp.Toast.ToastNotification;
@@ -29,11 +28,10 @@ public class PlaylistActivity extends AppCompatActivity {
     private LinearLayout playlistLinear;
     private RecyclerView RecycleViewPlaylist;
     private ArrayList<Playlist> playlistsList =new ArrayList<>();
-    private PlaylistFireBase playlistFireBase =new PlaylistFireBase();
+    private DAOPlaylist DAOPlaylist =new DAOPlaylist();
 
-    private FirebaseDatabase db = FirebaseDatabase.getInstance();
-    private FirebaseUser currUser = FirebaseAuth.getInstance().getCurrentUser();
-    private DatabaseReference root = db.getReference().child("Playlists").child(currUser.getUid());
+    String key = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,11 +52,13 @@ public class PlaylistActivity extends AppCompatActivity {
         AdapterPlaylist adapterPlaylist = new AdapterPlaylist(this, playlistsList);
         RecycleViewPlaylist.setAdapter(adapterPlaylist);
 
-        root.addListenerForSingleValueEvent(new ValueEventListener() {
+        DAOPlaylist.getRoot().addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    key = dataSnapshot.getKey();
                     Playlist p = dataSnapshot.getValue(Playlist.class);
+                    p.setKey(key);
                     playlistsList.add(p);
                 }
                 adapterPlaylist.notifyDataSetChanged();
@@ -87,7 +87,9 @@ public class PlaylistActivity extends AppCompatActivity {
             String title  = titlePlaylist.getText().toString();
             if(!title.equals("")){
                 Playlist playlist = new Playlist(title,null);
+
                 addPlaylistIntoFirebase(playlist);
+
                 restartRecycleView();
                 dialog.dismiss();
             }
@@ -103,14 +105,14 @@ public class PlaylistActivity extends AppCompatActivity {
         dialog.show();
     }
     void addPlaylistIntoFirebase(Playlist p){
-        playlistFireBase.add(p).addOnSuccessListener(succ->{
+        DAOPlaylist.add(p).addOnSuccessListener(succ->{
             ToastNotification.makeTextToShow(PlaylistActivity.this,"add "+p.getName() + " successful");
         }).addOnFailureListener(err->{
             ToastNotification.makeTextToShow(PlaylistActivity.this,err.getMessage());
         });
     }
 
-    void restartRecycleView(){
+    public void restartRecycleView(){
         playlistsList.clear();
         AddPlaylistIntoRecycleView();
     }
