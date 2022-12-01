@@ -7,6 +7,7 @@
         <entry key="..\:/CODE/School/android/final/MusicPlayerAndroid/app/src/main/res/drawable/ic_baseline.xml" value="0.2155" />
         <entry key="..\:/CODE/School/android/final/MusicPlayerAndroid/app/src/main/res/drawable/ic_baseline_face_24.xml" value="0.2145" />
         <entry key="..\:/CODE/School/android/final/MusicPlayerAndroid/app/src/main/res/drawable/ic_baseline_featured_play_list_24.xml" value="0.233" />
+        <entry key="..\:/CODE/School/android/final/MusicPlayerAndroid/app/src/main/res/drawable/ic_baseline_more_vert_24.xml" value="0.223" />
         <entry key="..\:/CODE/School/android/final/MusicPlayerAndroid/app/src/main/res/drawable/ic_baseline_navigate_next_24.xml" value="0.233" />
         <entry key="..\:/CODE/School/android/final/MusicPlayerAndroid/app/src/main/res/drawable/ic_baseline_pause_24.xml" value="0.233" />
         <entry key="..\:/CODE/School/android/final/MusicPlayerAndroid/app/src/main/res/drawable/ic_baseline_play_arrow_24.xml" value="0.233" />
@@ -20,6 +21,7 @@
         <entry key="..\:/CODE/School/android/final/MusicPlayerAndroid/app/src/main/res/drawable/ic_baseline_skip_previous_24.xml" value="0.233" />
         <entry key="..\:/CODE/School/android/final/MusicPlayerAndroid/app/src/main/res/drawable/ic_baseline_vpn_key_24.xml" value="0.233" />
         <entry key="..\:/CODE/School/android/final/MusicPlayerAndroid/app/src/main/res/layout/activity_add_account.xml" value="0.3578125" />
+        <entry key="..\:/CODE/School/android/final/MusicPlayerAndroid/app/src/main/res/layout/activity_detail_playlist.xml" value="0.26458333333333334" />
         <entry key="..\:/CODE/School/android/final/MusicPlayerAndroid/app/src/main/res/layout/activity_login.xml" value="0.3578125" />
         <entry key="..\:/CODE/School/android/final/MusicPlayerAndroid/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/CODE/School/android/final/MusicPlayerAndroid/app/src/main/res/layout/activity_music_player.xml" value="0.3572916666666667" />

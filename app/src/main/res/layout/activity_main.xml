@@ -63,7 +63,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/PlayMusic"
         android:orientation="vertical"
-        android:layout_below="@+id/viewPage">
+        android:layout_below="@+id/viewPage"
+        android:visibility="gone">
 
         <TextView
             android:layout_width="match_parent"

@@ -103,10 +103,8 @@ public class PlaylistActivity extends AppCompatActivity {
         dialog.show();
     }
     void addPlaylistIntoFirebase(Playlist p){
-
-
         playlistFireBase.add(p).addOnSuccessListener(succ->{
-            ToastNotification.makeTextToShow(PlaylistActivity.this,"add playlist success");
+            ToastNotification.makeTextToShow(PlaylistActivity.this,"add "+p.getName() + " successful");
         }).addOnFailureListener(err->{
             ToastNotification.makeTextToShow(PlaylistActivity.this,err.getMessage());
         });
