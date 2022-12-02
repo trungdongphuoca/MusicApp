@@ -15,7 +15,7 @@
         android:layout_height="128dp"
         android:layout_centerHorizontal="true"
         android:layout_marginVertical="8dp"
-        android:src="@drawable/add_account" />
+        android:src="@drawable/logo" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -94,6 +94,7 @@
             android:text="Create Account"
             android:layout_marginTop="12dp"
             android:textSize="16sp"
+            android:backgroundTint="@color/colorButton"
             />
         <ProgressBar
             android:layout_width="24dp"

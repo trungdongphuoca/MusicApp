@@ -7,8 +7,15 @@
     android:background="@color/my_primary"
     android:orientation="vertical"
     android:gravity="center"
-    tools:context=".StartActivity">
+    tools:context=".StartActivity"
+    android:backgroundTint="@color/colorButton">
 
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="137dp"
+        android:layout_height="153dp"
+        app:srcCompat="@drawable/logo" />
 
     <TextView
         android:layout_width="match_parent"
@@ -22,8 +29,7 @@
     <ProgressBar
         android:layout_width="24dp"
         android:layout_height="24dp"
-        android:indeterminateTint="@color/white"
         android:layout_margin="16dp"
-        />
+        android:indeterminateTint="@color/white" />
 
 </LinearLayout>
