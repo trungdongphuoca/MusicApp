@@ -28,7 +28,7 @@ public class PlaylistActivity extends AppCompatActivity {
     private LinearLayout playlistLinear;
     private RecyclerView RecycleViewPlaylist;
     private ArrayList<Playlist> playlistsList =new ArrayList<>();
-    private DAOPlaylist DAOPlaylist =new DAOPlaylist();
+    private DAOPlaylist dDAOPlaylist =new DAOPlaylist();
 
     String key = null;
 
@@ -52,7 +52,7 @@ public class PlaylistActivity extends AppCompatActivity {
         AdapterPlaylist adapterPlaylist = new AdapterPlaylist(this, playlistsList);
         RecycleViewPlaylist.setAdapter(adapterPlaylist);
 
-        DAOPlaylist.getRoot().addListenerForSingleValueEvent(new ValueEventListener() {
+        dDAOPlaylist.getRoot().addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()){
@@ -90,7 +90,7 @@ public class PlaylistActivity extends AppCompatActivity {
 
                 addPlaylistIntoFirebase(playlist);
 
-                restartRecycleView();
+//                restartRecycleView();
                 dialog.dismiss();
             }
             else{
@@ -105,8 +105,9 @@ public class PlaylistActivity extends AppCompatActivity {
         dialog.show();
     }
     void addPlaylistIntoFirebase(Playlist p){
-        DAOPlaylist.add(p).addOnSuccessListener(succ->{
+        dDAOPlaylist.add(p).addOnSuccessListener(succ->{
             ToastNotification.makeTextToShow(PlaylistActivity.this,"add "+p.getName() + " successful");
+
         }).addOnFailureListener(err->{
             ToastNotification.makeTextToShow(PlaylistActivity.this,err.getMessage());
         });

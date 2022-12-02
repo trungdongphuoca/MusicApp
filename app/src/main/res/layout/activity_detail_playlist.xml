@@ -5,18 +5,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".PlaylistInLibrary.DetailPlaylistActivity"
-    android:background="#FF403939">
+    android:background="#0F0513">
 
     <TextView
+        android:id="@+id/name_playlist"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/name_playlist"
+        android:padding="10dp"
         android:text="Playlist 1"
         android:textAlignment="center"
-        android:textStyle="bold"
+        android:textColor="#AAA9A9"
         android:textSize="35dp"
-        android:padding="10dp"
-        android:textColor="#9F9494"/>
+        android:textStyle="bold" />
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_below="@+id/name_playlist"
+        android:background="@color/underline"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -24,7 +31,7 @@
         android:id="@+id/noSong"
         android:layout_marginTop="300dp"
         android:text="No song in playlist"
-        android:layout_below="@+id/name_playlist"
+        android:layout_below="@+id/view"
         android:textAlignment="center"
         android:textStyle="bold"
         android:textSize="20dp"
@@ -33,12 +40,12 @@
         android:visibility="gone"/>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/playlistRV"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/name_playlist"
-        tools:listitem="@layout/list_songs"
+        android:layout_below="@+id/view"
         android:padding="2dp"
-        />
+        tools:listitem="@layout/list_songs" />
 
 
 

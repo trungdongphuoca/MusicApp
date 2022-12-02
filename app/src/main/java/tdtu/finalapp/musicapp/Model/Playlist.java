@@ -9,12 +9,12 @@ public class Playlist implements Serializable {
     @Exclude  // not add "key" property into firebase
     private String key;
     private String title;
-    private List<String> listSong;
+    private List<Song> listSong;
 
     public Playlist() {
     }
 
-    public Playlist(String title, List<String> listSong) {
+    public Playlist(String title, List<Song> listSong) {
         this.title = title;
         this.listSong = listSong;
     }
@@ -35,11 +35,11 @@ public class Playlist implements Serializable {
         this.title = name;
     }
 
-    public List<String> getListSong() {
+    public List<Song> getListSong() {
         return listSong;
     }
 
-    public void setListSong(List<String> listSong) {
+    public void setListSong(List<Song> listSong) {
         this.listSong = listSong;
     }
 }

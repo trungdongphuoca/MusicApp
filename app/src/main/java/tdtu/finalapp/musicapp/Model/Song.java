@@ -8,6 +8,7 @@ public class Song implements Serializable {
     private String title;
     private String duration;
 
+    public Song(){}
     public Song(String path, String title, String duration) {
         this.path = path;
         this.title = title;

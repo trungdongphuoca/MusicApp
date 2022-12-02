@@ -29,22 +29,22 @@
         android:textSize="16dp"
         android:textStyle="bold"
         android:layout_marginStart="16dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginEnd="44dp"
         android:layout_marginTop="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/image_Song"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/menu_playlist"
+        android:id="@+id/menu_song"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginEnd="10dp"
+        android:layout_marginEnd="2dp"
         android:layout_marginTop="14dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/nameSong"
         app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/ic_baseline_more_vert_24"/>
+        android:src="@drawable/ic_baseline_add_to_photos_24"/>
     <View
         android:layout_width="match_parent"
         android:layout_height="3dp"

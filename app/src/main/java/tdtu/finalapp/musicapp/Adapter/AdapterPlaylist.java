@@ -54,7 +54,7 @@ public class AdapterPlaylist extends RecyclerView.Adapter<AdapterPlaylist.ViewHo
 
         vhPlaylist.titlePlaylist.setText(p.getName());
         int fakePosition = position;
-        //delete playlist
+        //delete playlist (lỗi sai vị trí "position" của playlist))
         vhPlaylist.delete_playlist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -63,8 +63,6 @@ public class AdapterPlaylist extends RecyclerView.Adapter<AdapterPlaylist.ViewHo
                         ToastNotification.makeTextToShow(context,"delete " + "'" + p.getName() + "'" + " successful");
                         notifyItemRemoved(fakePosition);
                         playlistArraylist.remove(p);
-//                        System.out.println(fakePosition);
-//                        playlistArraylist.forEach(s -> System.out.println(s.getName()));
                     }).addOnFailureListener(err->{
                         ToastNotification.makeTextToShow(context,err.getMessage());
                     });
@@ -82,13 +80,12 @@ public class AdapterPlaylist extends RecyclerView.Adapter<AdapterPlaylist.ViewHo
             }
         });
 
-        //click playlist to show detail playlist
+        //click playlist to show detail playlist and list all dsach
         vhPlaylist.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //navigate to DetailPlaylist acitivty
-//                System.out.println(p.getName());
 
+                //navigate to DetailPlaylist acitivty
                 Intent intent = new Intent(context, DetailPlaylistActivity.class);
                 intent.putExtra("PLAYLIST", p);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
