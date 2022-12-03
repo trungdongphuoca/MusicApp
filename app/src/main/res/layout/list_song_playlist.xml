@@ -5,8 +5,6 @@
     android:layout_height="80dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:paddingTop="8dp"
-    android:layout_marginTop="4dp"
-    android:layout_marginHorizontal="8dp"
     android:background="#403434"
     android:foreground="?android:attr/selectableItemBackground">
     <ImageView
@@ -21,7 +19,7 @@
         app:shapeAppearanceOverlay="@style/RoundCorner"/>
 
     <TextView
-        android:id="@+id/nameSong"
+        android:id="@+id/nameSongPlaylist"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textColor="#CFC8C8"
@@ -36,14 +34,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/menu_song"
-        android:layout_width="40dp"
+        android:id="@+id/menu_delete_song"
+        android:layout_width="37dp"
         android:layout_height="match_parent"
         android:layout_marginEnd="2dp"
+        android:src="@drawable/ic_baseline_delete_24"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/nameSong"
-        app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/ic_baseline_add_to_photos_24"/>
+        app:layout_constraintStart_toEndOf="@+id/nameSongPlaylist"
+        app:layout_constraintTop_toTopOf="parent" />
     <View
         android:layout_width="match_parent"
         android:layout_height="3dp"

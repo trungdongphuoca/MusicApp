@@ -13,8 +13,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tdtu.finalapp.musicapp.Adapter.AdapterSong;
+import tdtu.finalapp.musicapp.Adapter.AdapterSongOfPlaylist;
 import tdtu.finalapp.musicapp.Model.Playlist;
 import tdtu.finalapp.musicapp.Model.Song;
+import tdtu.finalapp.musicapp.PlayMusic.MyMediaPlayer;
 import tdtu.finalapp.musicapp.R;
 
 public class DetailPlaylistActivity extends AppCompatActivity {
@@ -23,6 +25,8 @@ public class DetailPlaylistActivity extends AppCompatActivity {
     private TextView noSong;
     private Playlist passValue_playlist;
     private List<Song> lstSongOfPlaylist;
+
+    ArrayList<Song> SongsArrayList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,33 +38,37 @@ public class DetailPlaylistActivity extends AppCompatActivity {
         noSong = findViewById(R.id.noSong);
 
         passValue_playlist = (Playlist) getIntent().getSerializableExtra("PLAYLIST");
-
         name_playlist.setText(passValue_playlist.getName());
-        System.out.println("hello");
-
 
         setSongIntoRecycleView();
     }
     void setSongIntoRecycleView(){
         lstSongOfPlaylist = passValue_playlist.getListSong();
-//        List<Song> lstSong = lstSongOfPlaylist;
-
         if(lstSongOfPlaylist != null){
-            ArrayList<Song> SongsArrayList = new ArrayList<>();
+            noSong.setVisibility(View.GONE);
+
             for(Song s: lstSongOfPlaylist){
                 if(new File(s.getPath()).exists())
                     SongsArrayList.add(s);
             }
-//            if(SongsArrayList.size()==0){
-//                noSong.setVisibility(View.VISIBLE);
-//            }else{
+            if(SongsArrayList.size() <=0){
+                noSong.setVisibility(View.VISIBLE);
+            }else{
+                noSong.setVisibility(View.GONE);
                 //recyclerview
-                recyclerView.setLayoutManager(new LinearLayoutManager(DetailPlaylistActivity.this));
+                recyclerView.setLayoutManager(new LinearLayoutManager(this));
                 recyclerView.setHasFixedSize(true);
-                AdapterSong adapterSong = new AdapterSong(DetailPlaylistActivity.this, SongsArrayList);
+                AdapterSongOfPlaylist adapterSong = new AdapterSongOfPlaylist(DetailPlaylistActivity.this, SongsArrayList,passValue_playlist);
                 recyclerView.setAdapter(adapterSong);
                 adapterSong.notifyDataSetChanged();
-//            }
+            }
+        }
+        else{
+            noSong.setVisibility(View.VISIBLE);
         }
     }
+//    public void restartRecycleView(){
+//        playlistsList.clear();
+//        AddPlaylistIntoRecycleView();
+//    }
 }

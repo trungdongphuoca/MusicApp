@@ -45,7 +45,7 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/view"
         android:padding="2dp"
-        tools:listitem="@layout/list_songs" />
+        tools:listitem="@layout/list_song_playlist" />
 
 
 

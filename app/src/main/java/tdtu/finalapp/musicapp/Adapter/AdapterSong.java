@@ -146,6 +146,7 @@ public class AdapterSong extends RecyclerView.Adapter<AdapterSong.ViewHolderSong
             }
         }
         else{
+            existSongInPlaylist.add(s);
             HashMap<String,Object> hashMap = new HashMap<>();
             hashMap.put("name",p.getName());
             hashMap.put("listSong",existSongInPlaylist);
