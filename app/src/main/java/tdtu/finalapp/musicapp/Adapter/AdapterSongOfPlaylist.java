@@ -64,15 +64,14 @@ public class AdapterSongOfPlaylist extends RecyclerView.Adapter<AdapterSongOfPla
 //        }
 
 
-        int fake = position;
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //navigate to another acitivty
                 System.out.println(s.getTitle());
                 MyMediaPlayer.getInstance().reset();
-                MyMediaPlayer.currentIndex = fake;
-                MyMediaPlayer.FakeIndex = fake;
+                MyMediaPlayer.currentIndex = position;
+                MyMediaPlayer.FakeIndex = position;
                 Intent intent = new Intent(context, PlayMusicActivity.class);
                 intent.putExtra("LIST_SONG",songsArraylist);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -94,9 +93,11 @@ public class AdapterSongOfPlaylist extends RecyclerView.Adapter<AdapterSongOfPla
 
             daoPlaylist.update(playlist.getKey(),hashMap).addOnSuccessListener(succ->{
                 ToastNotification.makeTextToShow(context,"add " + s.getTitle() + " into " + playlist.getName()+" playlist successfully");
-                notifyItemRemoved(fake);
-//                songsArraylist.remove(s);
-                this.songsArraylist = (ArrayList<Song>) allSongInPlaylist;
+                songsArraylist.remove(s);
+                notifyItemRemoved(position);
+                notifyItemRangeRemoved(position,songsArraylist.size());
+
+//                this.songsArraylist = (ArrayList<Song>) allSongInPlaylist;
                 playlist.setListSong(songsArraylist);
             }).addOnFailureListener(err->{
                 ToastNotification.makeTextToShow(context,err.getMessage());
@@ -124,4 +125,5 @@ public class AdapterSongOfPlaylist extends RecyclerView.Adapter<AdapterSongOfPla
 
         }
     }
+
 }

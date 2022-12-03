@@ -1,5 +1,6 @@
 package tdtu.finalapp.musicapp.Adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -44,7 +45,7 @@ public class AdapterPlaylist extends RecyclerView.Adapter<AdapterPlaylist.ViewHo
         Playlist p = null;
         this.onBindViewHolder(holder,position,p);
     }
-    public void onBindViewHolder(@NonNull ViewHolderPlaylist holder, int position,Playlist p1) {
+    public void onBindViewHolder(@NonNull ViewHolderPlaylist holder, @SuppressLint("RecyclerView") int position, Playlist p1) {
 
 
 
@@ -53,7 +54,6 @@ public class AdapterPlaylist extends RecyclerView.Adapter<AdapterPlaylist.ViewHo
         Playlist p = p1==null ? playlistArraylist.get(position):p1;
 
         vhPlaylist.titlePlaylist.setText(p.getName());
-        int fakePosition = position;
 
         //delete playlist (lỗi sai vị trí "position" của playlist))
         vhPlaylist.delete_playlist.setOnClickListener(new View.OnClickListener() {
@@ -62,8 +62,10 @@ public class AdapterPlaylist extends RecyclerView.Adapter<AdapterPlaylist.ViewHo
                 if(p.getKey()!= null){
                     daoPlaylist.remove(p.getKey()).addOnSuccessListener(suc->{
                         ToastNotification.makeTextToShow(context,"delete " + "'" + p.getName() + "'" + " successful");
-                        notifyItemRemoved(fakePosition);
-                        playlistArraylist.remove(p);
+                        playlistArraylist.remove(position);
+                        notifyItemRemoved(position);
+                        notifyItemRangeRemoved(position,playlistArraylist.size());
+
                     }).addOnFailureListener(err->{
                         ToastNotification.makeTextToShow(context,err.getMessage());
                     });
@@ -71,8 +73,9 @@ public class AdapterPlaylist extends RecyclerView.Adapter<AdapterPlaylist.ViewHo
                 else{
                     daoPlaylist.remove().addOnSuccessListener(suc->{
                         ToastNotification.makeTextToShow(context,"delete "+"'" + p.getName() + "'" + " successful");
-                        notifyItemRemoved(fakePosition);
-                        playlistArraylist.remove(fakePosition);
+                        playlistArraylist.remove(position);
+                        notifyItemRemoved(position);
+                        notifyItemRangeRemoved(position,playlistArraylist.size());
                     }).addOnFailureListener(err->{
                         ToastNotification.makeTextToShow(context,err.getMessage());
                     });

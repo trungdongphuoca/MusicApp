@@ -64,13 +64,7 @@ public class PlayMusicActivity extends AppCompatActivity {
         menuIcon= findViewById(R.id.MenuInPlayMusic);
 
 
-        //auto next song when current song finish -> but it has some error
-//        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-//            @Override
-//            public void onCompletion(MediaPlayer mediaPlayer) {
-//                nextBtn.performClick();
-//            }
-//        });
+
 
 
         titleTv.setSelected(true);
@@ -177,6 +171,13 @@ public class PlayMusicActivity extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        //auto next song when current song finish -> but it has some error
+//        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+//            @Override
+//            public void onCompletion(MediaPlayer mediaPlayer) {
+//                nextBtn.performClick();
+//            }
+//        });
 
 
     }
