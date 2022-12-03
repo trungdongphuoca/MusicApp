@@ -98,7 +98,9 @@ public class SongFragment extends Fragment {
 
         recycleView  =view.findViewById(R.id.RecycleViewSong);
         noSong = view.findViewById(R.id.noSongText);
-
+        if(recycleView!=null){
+            recycleView.setAdapter(new AdapterSong(getActivity().getApplicationContext(),SongsArrayList));
+        }
         dataInitialize();
     }
 
@@ -107,7 +109,7 @@ public class SongFragment extends Fragment {
 
         if(checkPermission() == false){
             requestPermission();
-            return;
+//            return; // allow permisstion thi list all song
         }
 
         String[] projection = {

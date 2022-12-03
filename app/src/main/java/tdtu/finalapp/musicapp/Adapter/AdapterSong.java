@@ -44,7 +44,7 @@ public class AdapterSong extends RecyclerView.Adapter<AdapterSong.ViewHolderSong
     private Context context;
     private ArrayList<Song> songsArraylist;
     private DAOPlaylist daoPlaylist = new DAOPlaylist();
-    List<Playlist> listPlaylist = daoPlaylist.getAllPlaylist();
+    List<Playlist> listPlaylist;
 
     public AdapterSong(Context context, ArrayList<Song> songsArraylist) {
         this.context = context;
@@ -84,7 +84,10 @@ public class AdapterSong extends RecyclerView.Adapter<AdapterSong.ViewHolderSong
             }
         });
 
+
+        //click any playlist and adđ
         holder.menu.setOnClickListener(v-> {
+            listPlaylist = daoPlaylist.getAllPlaylist();
             PopupMenu popupMenu = new PopupMenu(this.context, holder.menu);
             for (Playlist p : listPlaylist) {
                 popupMenu.getMenu().add(p.getName());
@@ -98,7 +101,7 @@ public class AdapterSong extends RecyclerView.Adapter<AdapterSong.ViewHolderSong
                         if(p.getName().equals(title)){
                             System.out.println(s.getTitle());
 
-                            addSongToPlaylist(s,p,fake);
+                            addSongToPlaylist(s,p);
                             return true;
                         }
                     }
@@ -106,33 +109,54 @@ public class AdapterSong extends RecyclerView.Adapter<AdapterSong.ViewHolderSong
                     return false;
                 }
             });
+            listPlaylist.clear();
         });
     }
-    void addSongToPlaylist(Song s,Playlist p,int po){
+    void addSongToPlaylist(Song s,Playlist p){
         List<Song> existSongInPlaylist = new ArrayList<>();
 
-        if(p.getListSong() != null){
+        if(p.getListSong() != null){ // trog playlist nay da co list cua song
             existSongInPlaylist.addAll(p.getListSong());
+            boolean checkExistSong = true;
+            if(existSongInPlaylist.size()>0){
+                for(Song s1 :existSongInPlaylist ){
+                    if(s1.getTitle().equals(s.getTitle())){
+                        checkExistSong = false;
+                        break;
+                    }
+                }
+            }
+            if(checkExistSong){
+                existSongInPlaylist.add(s);
+
+                HashMap<String,Object> hashMap = new HashMap<>();
+                hashMap.put("name",p.getName());
+                hashMap.put("listSong",existSongInPlaylist);
+
+                existSongInPlaylist.forEach(System.out::println);
+
+                daoPlaylist.update(p.getKey(),hashMap).addOnSuccessListener(succ->{
+                    ToastNotification.makeTextToShow(context,"add " + s.getTitle() + " into " + p.getName()+" playlist successfully");
+                }).addOnFailureListener(err->{
+                    ToastNotification.makeTextToShow(context,err.getMessage());
+                });
+            }
+            else{
+                ToastNotification.makeTextToShow(context,s.getTitle() +" is exist in " + p.getName() + " playlist");
+            }
         }
-        if(!existSongInPlaylist.contains(s)){
-
-            existSongInPlaylist.add(s);
-
+        else{
             HashMap<String,Object> hashMap = new HashMap<>();
             hashMap.put("name",p.getName());
             hashMap.put("listSong",existSongInPlaylist);
+
             existSongInPlaylist.forEach(System.out::println);
+
             daoPlaylist.update(p.getKey(),hashMap).addOnSuccessListener(succ->{
-
                 ToastNotification.makeTextToShow(context,"add " + s.getTitle() + " into " + p.getName()+" playlist successfully");
-                notifyDataSetChanged();
-//                ((Activity)context).finish();
-
             }).addOnFailureListener(err->{
                 ToastNotification.makeTextToShow(context,err.getMessage());
             });
-        }else{
-            ToastNotification.makeTextToShow(context,s.getTitle() +" is exist in " + p.getName() + " playlist");
         }
 
     }

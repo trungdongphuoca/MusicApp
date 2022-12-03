@@ -90,7 +90,7 @@ public class PlaylistActivity extends AppCompatActivity {
 
                 addPlaylistIntoFirebase(playlist);
 
-//                restartRecycleView();
+                restartRecycleView();
                 dialog.dismiss();
             }
             else{

@@ -54,6 +54,7 @@ public class AdapterPlaylist extends RecyclerView.Adapter<AdapterPlaylist.ViewHo
 
         vhPlaylist.titlePlaylist.setText(p.getName());
         int fakePosition = position;
+
         //delete playlist (lỗi sai vị trí "position" của playlist))
         vhPlaylist.delete_playlist.setOnClickListener(new View.OnClickListener() {
             @Override
