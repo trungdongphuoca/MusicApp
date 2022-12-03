@@ -6,10 +6,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
+import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -20,11 +23,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import tdtu.finalapp.musicapp.Adapter.AdapterPlaylist;
+import tdtu.finalapp.musicapp.MainPackage.MainActivity;
 import tdtu.finalapp.musicapp.Model.Playlist;
 import tdtu.finalapp.musicapp.R;
 import tdtu.finalapp.musicapp.Toast.ToastNotification;
 
 public class PlaylistActivity extends AppCompatActivity {
+    private ImageView backInPlayMusic;
     private LinearLayout playlistLinear;
     private RecyclerView RecycleViewPlaylist;
     private ArrayList<Playlist> playlistsList =new ArrayList<>();
@@ -37,10 +42,11 @@ public class PlaylistActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_playlist);
 
-
+        backInPlayMusic = findViewById(R.id.backInPlayMusic);
         playlistLinear = findViewById(R.id.playlistLinear);
         RecycleViewPlaylist = findViewById(R.id.RecycleViewPlaylist);
 
+        backInPlayMusic.setOnClickListener(v->startActivity(new Intent(PlaylistActivity.this, MainActivity.class)));
         playlistLinear.setOnClickListener(v->showCustomDialogAddPlaylist());
 
         AddPlaylistIntoRecycleView();
@@ -52,6 +58,7 @@ public class PlaylistActivity extends AppCompatActivity {
         AdapterPlaylist adapterPlaylist = new AdapterPlaylist(this, playlistsList);
         RecycleViewPlaylist.setAdapter(adapterPlaylist);
 
+        //lay danh sach cac playlist ra va them vao object và list
         dDAOPlaylist.getRoot().addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

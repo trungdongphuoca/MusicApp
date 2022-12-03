@@ -90,6 +90,13 @@ public class PlayMusicActivity extends AppCompatActivity {
                         pausePlay.setImageResource(R.drawable.ic_baseline_play_arrow_24);
                         musicIcon.setRotation(x);
                     }
+                    //auto next song when current song finish -> but it has some error
+                    mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mediaPlayer) {
+                            nextBtn.performClick();
+                        }
+                    });
 
 
                 }
@@ -171,13 +178,7 @@ public class PlayMusicActivity extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        //auto next song when current song finish -> but it has some error
-//        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-//            @Override
-//            public void onCompletion(MediaPlayer mediaPlayer) {
-//                nextBtn.performClick();
-//            }
-//        });
+
 
 
     }
@@ -227,6 +228,7 @@ public class PlayMusicActivity extends AppCompatActivity {
             mediaPlayer.start();
     }
 
+    @SuppressLint("DefaultLocale")
     public static String convertToMMSS(String duration){
         Long millis = Long.parseLong(duration);
         return String.format("%02d:%02d",
@@ -263,5 +265,6 @@ public class PlayMusicActivity extends AppCompatActivity {
         checkRandom = false;
         checkRepeat = false;
     }
+
 
 }

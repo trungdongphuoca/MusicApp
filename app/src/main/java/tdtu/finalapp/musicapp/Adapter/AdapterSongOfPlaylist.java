@@ -1,5 +1,6 @@
 package tdtu.finalapp.musicapp.Adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -47,7 +48,7 @@ public class AdapterSongOfPlaylist extends RecyclerView.Adapter<AdapterSongOfPla
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolderSongPlaylist holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolderSongPlaylist holder, @SuppressLint("RecyclerView") int position) {
         Song s = songsArraylist.get(position);
 
         holder.titleSong.setText(s.getTitle());
