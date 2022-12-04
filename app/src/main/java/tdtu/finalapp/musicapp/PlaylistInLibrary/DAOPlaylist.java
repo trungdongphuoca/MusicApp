@@ -66,8 +66,10 @@ public class DAOPlaylist {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()){
                     Playlist p = dataSnapshot.getValue(Playlist.class);
-                    p.setKey(dataSnapshot.getKey());
-                    playlistsList.add(p);
+                   if(p!= null){
+                       p.setKey(dataSnapshot.getKey());
+                       playlistsList.add(p);
+                   }
                 }
             }
 

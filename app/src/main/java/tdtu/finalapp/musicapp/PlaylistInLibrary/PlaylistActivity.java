@@ -22,6 +22,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
+import java.util.List;
+
 import tdtu.finalapp.musicapp.Adapter.AdapterPlaylist;
 import tdtu.finalapp.musicapp.MainPackage.MainActivity;
 import tdtu.finalapp.musicapp.Model.Playlist;
@@ -80,6 +82,7 @@ public class PlaylistActivity extends AppCompatActivity {
 
     }
     void showCustomDialogAddPlaylist(){
+        List<Playlist> checkAllPlaylist = dDAOPlaylist.getAllPlaylist();
         Dialog dialog  = new Dialog(PlaylistActivity.this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(true);
@@ -91,14 +94,24 @@ public class PlaylistActivity extends AppCompatActivity {
         final Button cancelBtn = dialog.findViewById(R.id.cancelBtn);
 
         submitBtn.setOnClickListener(v->{
+            boolean checkExist = true;
             String title  = titlePlaylist.getText().toString();
             if(!title.equals("")){
-                Playlist playlist = new Playlist(title,null);
-
-                addPlaylistIntoFirebase(playlist);
-
-                restartRecycleView();
+                for(Playlist p1 : checkAllPlaylist){
+                    if(p1.getName().equalsIgnoreCase(title)){
+                        checkExist = false;
+                    }
+                }
+                if(checkExist){
+                    Playlist playlist = new Playlist(title,null);
+                    addPlaylistIntoFirebase(playlist);
+                    restartRecycleView();
+                }
+                else{
+                    ToastNotification.makeTextToShow(this,"Name Playlist is exist!");
+                }
                 dialog.dismiss();
+
             }
             else{
                 ToastNotification.makeTextToShow(this,"Pls fill name Playlist or cancel add playlist");

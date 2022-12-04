@@ -35,21 +35,14 @@
             android:textSize="30dp"
             android:textStyle="bold" />
 
-        <ImageView
-            android:id="@+id/SearchBtn"
-            android:layout_width="30dp"
-            android:layout_height="match_parent"
-            android:layout_marginStart="90dp"
-            android:backgroundTint="@color/white"
-            android:src="@drawable/ic_baseline_search_24" />
 
         <ImageView
             android:id="@+id/UserBtn"
-            android:layout_width="30dp"
+            android:layout_width="40dp"
             android:layout_height="match_parent"
-            android:layout_marginStart="5dp"
+            android:layout_marginStart="110dp"
             android:backgroundTint="@color/white"
-            android:src="@drawable/ic_baseline_face_24" />
+            android:src="@drawable/ic_baseline_account_circle_24" />
     </LinearLayout>
 
     <androidx.viewpager.widget.ViewPager

@@ -101,16 +101,11 @@ public class SongFragment extends Fragment {
         if(recycleView!=null){
             recycleView.setAdapter(new AdapterSong(getActivity().getApplicationContext(),SongsArrayList));
         }
-        dataInitialize();
+        dataInitialize(savedInstanceState);
     }
 
 
-    private void dataInitialize() {
-
-        if(checkPermission() == false){
-            requestPermission();
-//            return; // allow permisstion thi list all song
-        }
+    private void dataInitialize(Bundle savedInstanceState) {
 
         String[] projection = {
                 MediaStore.Audio.Media.TITLE,
@@ -139,7 +134,7 @@ public class SongFragment extends Fragment {
         }
 
     }
-    boolean checkPermission(){
+   /* boolean checkPermission(){
         int result = ContextCompat.checkSelfPermission(getContext(), Manifest.permission.READ_EXTERNAL_STORAGE);
         return  result == PackageManager.PERMISSION_GRANTED ?true : false;
     }
@@ -151,7 +146,7 @@ public class SongFragment extends Fragment {
             ActivityCompat.requestPermissions((Activity) getContext(),
                     new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
                     101);
-    }
+    }*/
 
     @Override
     public void onResume() {

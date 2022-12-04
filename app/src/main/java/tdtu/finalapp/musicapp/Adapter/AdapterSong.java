@@ -69,6 +69,8 @@ public class AdapterSong extends RecyclerView.Adapter<AdapterSong.ViewHolderSong
             holder.titleSong.setTextColor(Color.parseColor("#000000"));
         }
         int fake = position;
+
+        //click any song to play
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -105,7 +107,6 @@ public class AdapterSong extends RecyclerView.Adapter<AdapterSong.ViewHolderSong
                             return true;
                         }
                     }
-//                    }
                     return false;
                 }
             });

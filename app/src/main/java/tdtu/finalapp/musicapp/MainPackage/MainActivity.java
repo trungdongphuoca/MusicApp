@@ -3,12 +3,18 @@ package tdtu.finalapp.musicapp.MainPackage;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.MenuItem;
@@ -20,26 +26,50 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 
-import tdtu.finalapp.musicapp.Fragment.HomeFragment;
 import tdtu.finalapp.musicapp.Fragment.LibraryFragment;
 import tdtu.finalapp.musicapp.Fragment.SongFragment;
-import tdtu.finalapp.musicapp.PlayMusic.PlayMusicActivity;
 import tdtu.finalapp.musicapp.R;
 import tdtu.finalapp.musicapp.Toast.ToastNotification;
 import tdtu.finalapp.musicapp.loginAndRegis.LoginActivity;
 
 public class MainActivity extends AppCompatActivity {
-    private ImageView userImg,searchImg;
+    private ImageView userImg;
     private boolean isBackPressedOnce =false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if(!checkPermission()){
+            requestPermission();
+//            if (Build.VERSION.SDK_INT >= 11) {
+//                recreate();
+//                break;
+//            } else {
+//                Intent intent = getIntent();
+//                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+//                finish();
+//                overridePendingTransition(0, 0);
+//
+//                startActivity(intent);
+////                overridePendingTransition(0, 0);
+//                break;
+//            }
+
+        }
+
+
         setContentView(R.layout.activity_main);
-        searchImg = findViewById(R.id.SearchBtn);
         userImg = findViewById(R.id.UserBtn);
         initViewPage();
 
         userImg.setOnClickListener(v->showUser());
+    }
+    public static void restartActivity(Activity activity){
+        if (Build.VERSION.SDK_INT >= 11) {
+            activity.recreate();
+        } else {
+            activity.finish();
+            activity.startActivity(activity.getIntent());
+        }
     }
     void showUser(){
         PopupMenu popupMenu = new PopupMenu(MainActivity.this,userImg);
@@ -65,7 +95,8 @@ public class MainActivity extends AppCompatActivity {
                 } else if ("Exit".equals(title)) {
                     ToastNotification.makeTextToShow(MainActivity.this, "Exit app");
 //                    startActivity(new Intent(MainActivity.this, LoginActivity.class));
-//                    finish();
+                    finish();
+                    System.exit(0);
                     return true;
                 }
                 return false;
@@ -73,6 +104,21 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    boolean checkPermission(){
+        int result = ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE);
+        return  result == PackageManager.PERMISSION_GRANTED ?true : false;
+    }
+    void requestPermission(){
+        if(ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this,Manifest.permission.READ_EXTERNAL_STORAGE)){
+            ToastNotification.makeTextToShow(getApplicationContext(),"READ PERMISSION IS REQUIRED, PLS ALLOW FROM SETTINGS");
+
+        }
+        else
+            ActivityCompat.requestPermissions(MainActivity.this,
+                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                    101);
+        restartActivity(MainActivity.this);
+    }
     private void initViewPage() {
         ViewPager viewPager = findViewById(R.id.viewPage);
         TabLayout tabLayout = findViewById(R.id.tab_layout);
@@ -86,6 +132,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
 
     public static class ViewPageAdapter extends FragmentPagerAdapter{
 

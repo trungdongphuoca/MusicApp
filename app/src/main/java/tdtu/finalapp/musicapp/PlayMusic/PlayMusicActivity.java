@@ -4,12 +4,14 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.SeekBar;
@@ -21,23 +23,29 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import tdtu.finalapp.musicapp.Fragment.SongFragment;
 import tdtu.finalapp.musicapp.MainPackage.MainActivity;
+import tdtu.finalapp.musicapp.Model.Playlist;
 import tdtu.finalapp.musicapp.Model.Song;
+import tdtu.finalapp.musicapp.PlaylistInLibrary.DAOPlaylist;
+import tdtu.finalapp.musicapp.PlaylistInLibrary.PlaylistActivity;
 import tdtu.finalapp.musicapp.R;
 import tdtu.finalapp.musicapp.Toast.ToastNotification;
 
 public class PlayMusicActivity extends AppCompatActivity {
     private TextView titleTv,currentTimeTv,totalTimeTv;
     private SeekBar seekBar;
-    private ImageView pausePlay,nextBtn,previousBtn,musicIcon,backIcon,menuIcon;
+    private ImageView pausePlay,nextBtn,previousBtn,musicIcon,backIcon;
     private ArrayList<Song> songsList;
     private Song currentSong;
     private MediaPlayer mediaPlayer = MyMediaPlayer.getInstance();
     private int x=0;
+    private List<Playlist> listPlaylist;
+    private DAOPlaylist daoPlaylist = new DAOPlaylist();
 
 
     private ImageView randomBtn,repeatBtn;
@@ -61,7 +69,6 @@ public class PlayMusicActivity extends AppCompatActivity {
         repeatBtn = findViewById(R.id.repeat);
         musicIcon = findViewById(R.id.music_icon_big);
         backIcon = findViewById(R.id.backInPlayMusic);
-        menuIcon= findViewById(R.id.MenuInPlayMusic);
 
 
 
@@ -94,7 +101,7 @@ public class PlayMusicActivity extends AppCompatActivity {
                     mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                         @Override
                         public void onCompletion(MediaPlayer mediaPlayer) {
-                            nextBtn.performClick();
+                            playNextSong();
                         }
                     });
 
@@ -123,24 +130,19 @@ public class PlayMusicActivity extends AppCompatActivity {
             }
         });
 
-        menuIcon.setOnClickListener(v->showMenu());
+
         backIcon.setOnClickListener(v-> startActivity(new Intent(PlayMusicActivity.this, MainActivity.class)));
     }
 
-    void showMenu(){
-        PopupMenu popupMenu = new PopupMenu(PlayMusicActivity.this,menuIcon);
-        popupMenu.getMenu().add("add to playlist");
-        popupMenu.show();
-        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem menuItem) {
-                if(menuItem.getTitle().equals("add to playlist")){
-                    ToastNotification.makeTextToShow(PlayMusicActivity.this,"add the playlist has been clicked");
-                    return true;
-                }
-                return false;
-            }
-        });
+
+    void showAlertDialog(){
+        Dialog dialog  = new Dialog(PlayMusicActivity.this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCancelable(true);
+
+        dialog.setContentView(R.layout.custom_dialog_addplaylist);
+
+
     }
 
     ////set name and total time of song, some events play pause next previous
