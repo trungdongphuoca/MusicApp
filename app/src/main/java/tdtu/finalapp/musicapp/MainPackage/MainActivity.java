@@ -23,11 +23,13 @@ import android.widget.PopupMenu;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 
 import tdtu.finalapp.musicapp.Fragment.LibraryFragment;
 import tdtu.finalapp.musicapp.Fragment.SongFragment;
+import tdtu.finalapp.musicapp.PlaylistInLibrary.DAOPlaylist;
 import tdtu.finalapp.musicapp.R;
 import tdtu.finalapp.musicapp.Toast.ToastNotification;
 import tdtu.finalapp.musicapp.loginAndRegis.LoginActivity;
@@ -40,23 +42,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         if(!checkPermission()){
             requestPermission();
-//            if (Build.VERSION.SDK_INT >= 11) {
-//                recreate();
-//                break;
-//            } else {
-//                Intent intent = getIntent();
-//                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-//                finish();
-//                overridePendingTransition(0, 0);
-//
-//                startActivity(intent);
-////                overridePendingTransition(0, 0);
-//                break;
-//            }
-
         }
-
-
         setContentView(R.layout.activity_main);
         userImg = findViewById(R.id.UserBtn);
         initViewPage();
@@ -73,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
     }
     void showUser(){
         PopupMenu popupMenu = new PopupMenu(MainActivity.this,userImg);
-        popupMenu.getMenu().add("See your profile");
+        popupMenu.getMenu().add("See your Email");
         popupMenu.getMenu().add("Sign out");
         popupMenu.getMenu().add("Exit");
         popupMenu.show();
@@ -85,14 +71,12 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, LoginActivity.class));
                 finish();
                 return true;
-            } else if ("See your profile".contentEquals(title)) {
-                ToastNotification.makeTextToShow(MainActivity.this, "Your profile will present now!!");
-//                    startActivity(new Intent(MainActivity.this, LoginActivity.class));
-//                    finish();
+            } else if ("See your Email".contentEquals(title)) {
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                ToastNotification.makeTextToShow(MainActivity.this, "Hello "+user.getEmail());
                 return true;
             } else if ("Exit".contentEquals(title)) {
                 ToastNotification.makeTextToShow(MainActivity.this, "Exit app");
-//                    startActivity(new Intent(MainActivity.this, LoginActivity.class));
                 finish();
                 System.exit(0);
                 return true;
@@ -121,7 +105,6 @@ public class MainActivity extends AppCompatActivity {
         TabLayout tabLayout = findViewById(R.id.tab_layout);
 
         ViewPageAdapter viewPageAdapter = new ViewPageAdapter(getSupportFragmentManager());
-//        viewPageAdapter.addFragments(new HomeFragment(),"Home");
         viewPageAdapter.addFragments(new SongFragment(),"Song");
         viewPageAdapter.addFragments(new LibraryFragment(),"Library");
         viewPager.setAdapter(viewPageAdapter);

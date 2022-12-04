@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -53,6 +54,7 @@ public class PlayMusicActivity extends AppCompatActivity {
     boolean checkRepeat = false;
     private Random random = new Random();
 
+    private boolean check =false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,16 +72,9 @@ public class PlayMusicActivity extends AppCompatActivity {
         musicIcon = findViewById(R.id.music_icon_big);
         backIcon = findViewById(R.id.backInPlayMusic);
 
-
-
-
-
         titleTv.setSelected(true);
 
         songsList = (ArrayList<Song>) getIntent().getSerializableExtra("LIST_SONG");
-
-
-
         setResourcesWithMusic();
 
 
@@ -102,6 +97,8 @@ public class PlayMusicActivity extends AppCompatActivity {
                         @Override
                         public void onCompletion(MediaPlayer mediaPlayer) {
                             playNextSong();
+                            check= true;
+
                         }
                     });
 
@@ -134,19 +131,17 @@ public class PlayMusicActivity extends AppCompatActivity {
         backIcon.setOnClickListener(v-> startActivity(new Intent(PlayMusicActivity.this, MainActivity.class)));
     }
 
-
-    void showAlertDialog(){
-        Dialog dialog  = new Dialog(PlayMusicActivity.this);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setCancelable(true);
-
-        dialog.setContentView(R.layout.custom_dialog_addplaylist);
-
-
-    }
-
     ////set name and total time of song, some events play pause next previous
     void setResourcesWithMusic(){
+        if(check){
+            MyMediaPlayer.currentIndex -=1;
+        }
+        System.out.println(MyMediaPlayer.currentIndex);
+        if(MyMediaPlayer.currentIndex == -1 )
+            MyMediaPlayer.currentIndex = 0;
+        if(MyMediaPlayer.currentIndex>= songsList.size()){
+            MyMediaPlayer.currentIndex = songsList.size() -1;
+        }
         currentSong = songsList.get(MyMediaPlayer.currentIndex);
 
         titleTv.setText(currentSong.getTitle());

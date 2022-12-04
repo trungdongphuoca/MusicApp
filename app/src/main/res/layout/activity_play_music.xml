@@ -96,16 +96,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/song_playing"/>
 
-    <ImageView
-        android:id="@+id/MenuInPlayMusic"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:src="@drawable/ic_baseline_more_vert_24"
-        android:contentDescription="@string/app_name"
-        android:layout_marginEnd="20dp"
-        app:layout_constraintBottom_toBottomOf="@id/song_playing"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/song_playing"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

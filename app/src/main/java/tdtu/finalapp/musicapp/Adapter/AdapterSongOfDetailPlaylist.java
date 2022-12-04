@@ -25,7 +25,7 @@ import tdtu.finalapp.musicapp.PlaylistInLibrary.DAOPlaylist;
 import tdtu.finalapp.musicapp.R;
 import tdtu.finalapp.musicapp.Toast.ToastNotification;
 
-public class AdapterSongOfPlaylist extends RecyclerView.Adapter<AdapterSongOfPlaylist.ViewHolderSongPlaylist> {
+public class AdapterSongOfDetailPlaylist extends RecyclerView.Adapter<AdapterSongOfDetailPlaylist.ViewHolderSongPlaylist> {
 
 
     private Context context;
@@ -34,7 +34,7 @@ public class AdapterSongOfPlaylist extends RecyclerView.Adapter<AdapterSongOfPla
     private Playlist playlist;
 
 
-    public AdapterSongOfPlaylist(Context context, ArrayList<Song> songsArraylist,Playlist p1) {
+    public AdapterSongOfDetailPlaylist(Context context, ArrayList<Song> songsArraylist, Playlist p1) {
         this.context = context;
         this.songsArraylist = songsArraylist;
         this.playlist = p1;
@@ -44,7 +44,7 @@ public class AdapterSongOfPlaylist extends RecyclerView.Adapter<AdapterSongOfPla
     @Override
     public ViewHolderSongPlaylist onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(context).inflate(R.layout.list_song_playlist,parent,false);
-        return new AdapterSongOfPlaylist.ViewHolderSongPlaylist(v);
+        return new AdapterSongOfDetailPlaylist.ViewHolderSongPlaylist(v);
     }
 
     @Override
@@ -54,11 +54,12 @@ public class AdapterSongOfPlaylist extends RecyclerView.Adapter<AdapterSongOfPla
         holder.titleSong.setText(s.getTitle());
 
 
+        //play nhac
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //navigate to another acitivty
-                System.out.println(s.getTitle());
+
                 MyMediaPlayer.getInstance().reset();
                 MyMediaPlayer.currentIndex = position;
                 MyMediaPlayer.FakeIndex = position;
@@ -82,12 +83,10 @@ public class AdapterSongOfPlaylist extends RecyclerView.Adapter<AdapterSongOfPla
             hashMap.put("listSong",allSongInPlaylist);
 
             daoPlaylist.update(playlist.getKey(),hashMap).addOnSuccessListener(succ->{
-                ToastNotification.makeTextToShow(context,"add " + s.getTitle() + " into " + playlist.getName()+" playlist successfully");
+                ToastNotification.makeTextToShow(context,"delete " + s.getTitle() + " from " + playlist.getName()+" playlist successfully");
                 songsArraylist.remove(s);
                 notifyItemRemoved(position);
                 notifyItemRangeRemoved(position,songsArraylist.size());
-
-//                this.songsArraylist = (ArrayList<Song>) allSongInPlaylist;
                 playlist.setListSong(songsArraylist);
             }).addOnFailureListener(err->{
                 ToastNotification.makeTextToShow(context,err.getMessage());

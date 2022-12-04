@@ -1,12 +1,9 @@
 package tdtu.finalapp.musicapp.Adapter;
 
-import android.app.Activity;
-import android.app.AlertDialog;
+import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
-import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,28 +13,17 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.ValueEventListener;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
-import tdtu.finalapp.musicapp.MainPackage.MainActivity;
 import tdtu.finalapp.musicapp.Model.Playlist;
 import tdtu.finalapp.musicapp.Model.Song;
 import tdtu.finalapp.musicapp.PlayMusic.MyMediaPlayer;
 import tdtu.finalapp.musicapp.PlayMusic.PlayMusicActivity;
 import tdtu.finalapp.musicapp.PlaylistInLibrary.DAOPlaylist;
-import tdtu.finalapp.musicapp.PlaylistInLibrary.PlaylistActivity;
 import tdtu.finalapp.musicapp.R;
 import tdtu.finalapp.musicapp.Toast.ToastNotification;
-import tdtu.finalapp.musicapp.loginAndRegis.LoginActivity;
 
 public class AdapterSong extends RecyclerView.Adapter<AdapterSong.ViewHolderSong>{
 
@@ -59,7 +45,7 @@ public class AdapterSong extends RecyclerView.Adapter<AdapterSong.ViewHolderSong
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolderSong holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolderSong holder, @SuppressLint("RecyclerView") int position) {
         Song s = songsArraylist.get(position);
         holder.titleSong.setText(s.getTitle());
 
@@ -68,7 +54,7 @@ public class AdapterSong extends RecyclerView.Adapter<AdapterSong.ViewHolderSong
         }else{
             holder.titleSong.setTextColor(Color.parseColor("#000000"));
         }
-        int fake = position;
+
 
         //click any song to play
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -77,7 +63,7 @@ public class AdapterSong extends RecyclerView.Adapter<AdapterSong.ViewHolderSong
                 //navigate to another acitivty
 
                 MyMediaPlayer.getInstance().reset();
-                MyMediaPlayer.currentIndex = fake;
+                MyMediaPlayer.currentIndex = position;
                 Intent intent = new Intent(context, PlayMusicActivity.class);
                 intent.putExtra("LIST_SONG",songsArraylist);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -87,7 +73,7 @@ public class AdapterSong extends RecyclerView.Adapter<AdapterSong.ViewHolderSong
         });
 
 
-        //click any playlist and adđ
+        //click any playlist and add song to playlist
         holder.menu.setOnClickListener(v-> {
             listPlaylist = daoPlaylist.getAllPlaylist();
             PopupMenu popupMenu = new PopupMenu(this.context, holder.menu);
@@ -101,8 +87,6 @@ public class AdapterSong extends RecyclerView.Adapter<AdapterSong.ViewHolderSong
                     CharSequence title = menuItem.getTitle();
                     for (Playlist p: listPlaylist) {
                         if(p.getName().equals(title)){
-                            System.out.println(s.getTitle());
-
                             addSongToPlaylist(s,p);
                             return true;
                         }

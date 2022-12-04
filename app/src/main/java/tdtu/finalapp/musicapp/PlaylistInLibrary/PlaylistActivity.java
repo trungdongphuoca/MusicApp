@@ -7,19 +7,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +30,6 @@ public class PlaylistActivity extends AppCompatActivity {
     private RecyclerView RecycleViewPlaylist;
     private ArrayList<Playlist> playlistsList =new ArrayList<>();
     private DAOPlaylist dDAOPlaylist =new DAOPlaylist();
-
     String key = null;
 
     @Override
@@ -53,10 +48,11 @@ public class PlaylistActivity extends AppCompatActivity {
 
     }
     void AddPlaylistIntoRecycleView(){
+
         RecycleViewPlaylist.setLayoutManager(new LinearLayoutManager(this));
         RecycleViewPlaylist.setHasFixedSize(true);
         AdapterPlaylist adapterPlaylist = new AdapterPlaylist(this, playlistsList);
-        RecycleViewPlaylist.setAdapter(adapterPlaylist);
+
 
         //lay danh sach cac playlist ra va them vao object và list
         dDAOPlaylist.getRoot().addListenerForSingleValueEvent(new ValueEventListener() {
@@ -69,6 +65,7 @@ public class PlaylistActivity extends AppCompatActivity {
                     playlistsList.add(p);
                 }
                 adapterPlaylist.notifyDataSetChanged();
+                RecycleViewPlaylist.setAdapter(adapterPlaylist);
             }
 
             @Override
@@ -98,6 +95,7 @@ public class PlaylistActivity extends AppCompatActivity {
                 for(Playlist p1 : checkAllPlaylist){
                     if(p1.getName().equalsIgnoreCase(title)){
                         checkExist = false;
+                        break;
                     }
                 }
                 if(checkExist){
@@ -135,4 +133,5 @@ public class PlaylistActivity extends AppCompatActivity {
         playlistsList.clear();
         AddPlaylistIntoRecycleView();
     }
+
 }
