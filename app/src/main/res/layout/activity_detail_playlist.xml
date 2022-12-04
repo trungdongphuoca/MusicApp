@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PlaylistInLibrary.DetailPlaylistActivity"
-    android:background="#0F0513">
+    tools:context=".PlaylistInLibrary.DetailPlaylistActivity">
     <LinearLayout
         android:id="@+id/head_Playlist"
         android:layout_width="match_parent"
@@ -30,7 +29,7 @@
             android:text="Playlist 1"
             android:padding="10dp"
             android:textAlignment="center"
-            android:textColor="#AAA9A9"
+            android:textColor="@color/colorButton"
             android:textSize="30dp"
             android:textStyle="bold" />
 

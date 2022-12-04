@@ -10,7 +10,6 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
@@ -114,20 +113,4 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    public void onBackPressed() {
-        if(isBackPressedOnce){
-            super.onBackPressed();
-            return;
-        }
-        ToastNotification.makeTextToShow(MainActivity.this, "Press again to exist!");
-        isBackPressedOnce = true;
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                isBackPressedOnce = false;
-            }
-        },3000);
-    }
 }

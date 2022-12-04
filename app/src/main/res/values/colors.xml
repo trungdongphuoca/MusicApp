@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#3F51B5</color>
-    <color name="teal_200">#FF018786</color>
+    <color name="my_primary">#FF24D3FE</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
     <color name="black">#231E1E</color>
-    <color name="colorWhite">#FFFFFF</color>
+    <color name="white">#D8D4D4</color>
     <color name="colorButton">#09276B</color>
     <color name="underline">#473E3E</color>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#3F51B5</color>
+    <color name="colorWhite">#FFFFFF</color>
     <color name="colorBackground">#F3F3F3</color>
     <color name="colorStroke">#BDBDBD</color>
     <color name="colorHint">#ECECEC</color>
