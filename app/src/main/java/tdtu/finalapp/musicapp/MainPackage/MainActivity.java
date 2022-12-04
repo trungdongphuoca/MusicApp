@@ -77,36 +77,33 @@ public class MainActivity extends AppCompatActivity {
         popupMenu.getMenu().add("Sign out");
         popupMenu.getMenu().add("Exit");
         popupMenu.show();
-        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem menuItem) {
-                CharSequence title = menuItem.getTitle();
-                if ("Sign out".equals(title)) {
-                    FirebaseAuth.getInstance().signOut();
-                    ToastNotification.makeTextToShow(MainActivity.this, "Sign out successful");
-                    startActivity(new Intent(MainActivity.this, LoginActivity.class));
-                    finish();
-                    return true;
-                } else if ("See your profile".equals(title)) {
-                    ToastNotification.makeTextToShow(MainActivity.this, "Your profile will present now!!");
+        popupMenu.setOnMenuItemClickListener(menuItem -> {
+            CharSequence title = menuItem.getTitle();
+            if ("Sign out".contentEquals(title)) {
+                FirebaseAuth.getInstance().signOut();
+                ToastNotification.makeTextToShow(MainActivity.this, "Sign out successful");
+                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                finish();
+                return true;
+            } else if ("See your profile".contentEquals(title)) {
+                ToastNotification.makeTextToShow(MainActivity.this, "Your profile will present now!!");
 //                    startActivity(new Intent(MainActivity.this, LoginActivity.class));
 //                    finish();
-                    return true;
-                } else if ("Exit".equals(title)) {
-                    ToastNotification.makeTextToShow(MainActivity.this, "Exit app");
+                return true;
+            } else if ("Exit".contentEquals(title)) {
+                ToastNotification.makeTextToShow(MainActivity.this, "Exit app");
 //                    startActivity(new Intent(MainActivity.this, LoginActivity.class));
-                    finish();
-                    System.exit(0);
-                    return true;
-                }
-                return false;
+                finish();
+                System.exit(0);
+                return true;
             }
+            return false;
         });
     }
 
     boolean checkPermission(){
         int result = ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE);
-        return  result == PackageManager.PERMISSION_GRANTED ?true : false;
+        return result == PackageManager.PERMISSION_GRANTED;
     }
     void requestPermission(){
         if(ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this,Manifest.permission.READ_EXTERNAL_STORAGE)){
@@ -136,10 +133,10 @@ public class MainActivity extends AppCompatActivity {
 
     public static class ViewPageAdapter extends FragmentPagerAdapter{
 
-        private ArrayList<Fragment> fragments;
-        private ArrayList<String> titles;
+        private final ArrayList<Fragment> fragments;
+        private final ArrayList<String> titles;
         public ViewPageAdapter(@NonNull FragmentManager fm) {
-            super(fm);
+            super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
             this.fragments = new ArrayList<>();
             this.titles = new ArrayList<>();
         }
@@ -174,11 +171,6 @@ public class MainActivity extends AppCompatActivity {
         ToastNotification.makeTextToShow(MainActivity.this, "Press again to exist!");
         isBackPressedOnce = true;
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                isBackPressedOnce = false;
-            }
-        },3000);
+        new Handler().postDelayed(() -> isBackPressedOnce = false,3000);
     }
 }
