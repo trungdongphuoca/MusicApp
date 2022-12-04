@@ -29,13 +29,13 @@ import tdtu.finalapp.musicapp.Toast.ToastNotification;
 import tdtu.finalapp.musicapp.loginAndRegis.LoginActivity;
 
 public class MainActivity extends AppCompatActivity {
-    private ImageView userImg,searchImg;
+    private ImageView userImg;
     private boolean isBackPressedOnce =false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        searchImg = findViewById(R.id.SearchBtn);
+        ImageView searchImg = findViewById(R.id.SearchBtn);
         userImg = findViewById(R.id.UserBtn);
         initViewPage();
 
@@ -59,13 +59,9 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 } else if ("See your profile".equals(title)) {
                     ToastNotification.makeTextToShow(MainActivity.this, "Your profile will present now!!");
-//                    startActivity(new Intent(MainActivity.this, LoginActivity.class));
-//                    finish();
                     return true;
                 } else if ("Exit".equals(title)) {
                     ToastNotification.makeTextToShow(MainActivity.this, "Exit app");
-//                    startActivity(new Intent(MainActivity.this, LoginActivity.class));
-//                    finish();
                     return true;
                 }
                 return false;

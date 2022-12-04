@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#272424"
+    android:background="@color/colorWhite"
 
     tools:context=".MainPackage.MainActivity">
 
@@ -12,7 +12,7 @@
         android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@color/black"
+        android:background="@color/colorButton"
         android:gravity="start"
         android:orientation="horizontal">
 
@@ -31,31 +31,31 @@
             android:layout_marginTop="5dp"
             android:text="Music Player"
             android:textAlignment="center"
-            android:textColor="#C6B8B8"
+            android:textColor="@color/colorWhite"
             android:textSize="30dp"
             android:textStyle="bold" />
 
         <ImageView
             android:id="@+id/SearchBtn"
-            android:layout_width="30dp"
+            android:layout_width="40dp"
             android:layout_height="match_parent"
-            android:layout_marginStart="90dp"
-            android:backgroundTint="@color/white"
+            android:layout_marginStart="60dp"
+            android:backgroundTint="@color/colorWhite"
             android:src="@drawable/ic_baseline_search_24" />
 
         <ImageView
             android:id="@+id/UserBtn"
-            android:layout_width="30dp"
+            android:layout_width="40dp"
             android:layout_height="match_parent"
-            android:layout_marginStart="5dp"
-            android:backgroundTint="@color/white"
+            android:layout_marginStart="10dp"
+            android:backgroundTint="@color/colorWhite"
             android:src="@drawable/ic_baseline_face_24" />
     </LinearLayout>
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewPage"
         android:layout_width="match_parent"
-        android:layout_height="635dp"
+        android:layout_height="650dp"
         android:layout_below="@+id/header" />
 
     <LinearLayout
@@ -64,55 +64,33 @@
         android:id="@+id/PlayMusic"
         android:orientation="horizontal"
         android:layout_below="@+id/viewPage"
-        android:visibility="visible">
-        <ImageView
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:padding="4dp"
-            android:src="@drawable/ic_baseline_music_note_24"/>
-        <TextView
-            android:layout_width="260dp"
-            android:layout_height="match_parent"
-            android:text="name song"
-            android:textColor="@color/white"
-            android:paddingLeft="12dp"
-            android:paddingTop="4dp"
-            android:textSize="19dp"
-            android:textStyle="bold"
+        android:visibility="gone">
 
-            />
-        <LinearLayout
-            android:layout_width="wrap_content"
+        <TextView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            >
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginTop="2dp"
-                android:padding="4dp"
-                android:src="@drawable/ic_baseline_play_arrow_24"/>
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginTop="2dp"
-                android:padding="4dp"
-                android:src="@drawable/ic_baseline_skip_next_24"/>
-        </LinearLayout>
+            android:text="To play Music"
+            android:textAlignment="center"
+            android:textColor="@color/colorWhite" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="To play Music"
+            android:textColor="@color/colorWhite"
+            android:textAlignment="center"/>
     </LinearLayout>
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/PlayMusic"
         android:layout_alignParentBottom="true"
-        android:background="#272424"
-        app:tabIndicatorColor="#733097"
+        android:layout_marginBottom="0dp"
+        android:background="@color/colorButton"
+        app:tabIndicatorColor="#3D2C8D"
         app:tabIndicatorFullWidth="true"
         app:tabIndicatorGravity="center"
         app:tabIndicatorHeight="40dp"
-        app:tabTextColor="@color/white" />
-
-
+        app:tabTextColor="@color/colorWhite" />
 
 </RelativeLayout>

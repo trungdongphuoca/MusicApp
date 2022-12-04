@@ -9,22 +9,16 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
-import tdtu.finalapp.musicapp.Fragment.SongFragment;
 import tdtu.finalapp.musicapp.MainPackage.MainActivity;
 import tdtu.finalapp.musicapp.Model.Song;
 import tdtu.finalapp.musicapp.R;
@@ -33,17 +27,21 @@ import tdtu.finalapp.musicapp.Toast.ToastNotification;
 public class PlayMusicActivity extends AppCompatActivity {
     private TextView titleTv,currentTimeTv,totalTimeTv;
     private SeekBar seekBar;
-    private ImageView pausePlay,nextBtn,previousBtn,musicIcon,backIcon,menuIcon;
+    private ImageView pausePlay;
+    private ImageView nextBtn;
+    private ImageView previousBtn;
+    private ImageView musicIcon;
+    private ImageView menuIcon;
     private ArrayList<Song> songsList;
     private Song currentSong;
-    private MediaPlayer mediaPlayer = MyMediaPlayer.getInstance();
+    private final MediaPlayer mediaPlayer = MyMediaPlayer.getInstance();
     private int x=0;
 
 
     private ImageView randomBtn,repeatBtn;
     boolean checkRandom = false;
     boolean checkRepeat = false;
-    private Random random = new Random();
+    private final Random random = new Random();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,18 +58,13 @@ public class PlayMusicActivity extends AppCompatActivity {
         randomBtn = findViewById(R.id.random);
         repeatBtn = findViewById(R.id.repeat);
         musicIcon = findViewById(R.id.music_icon_big);
-        backIcon = findViewById(R.id.backInPlayMusic);
+        ImageView backIcon = findViewById(R.id.backInPlayMusic);
         menuIcon= findViewById(R.id.MenuInPlayMusic);
-
-
-
 
 
         titleTv.setSelected(true);
 
         songsList = (ArrayList<Song>) getIntent().getSerializableExtra("LIST_SONG");
-
-
 
         setResourcesWithMusic();
 
@@ -97,7 +90,6 @@ public class PlayMusicActivity extends AppCompatActivity {
                             nextBtn.performClick();
                         }
                     });
-
 
                 }
                 new Handler().postDelayed(this,100);
@@ -230,7 +222,7 @@ public class PlayMusicActivity extends AppCompatActivity {
 
     @SuppressLint("DefaultLocale")
     public static String convertToMMSS(String duration){
-        Long millis = Long.parseLong(duration);
+        long millis = Long.parseLong(duration);
         return String.format("%02d:%02d",
                 TimeUnit.MILLISECONDS.toMinutes(millis) % TimeUnit.HOURS.toMinutes(1),
                 TimeUnit.MILLISECONDS.toSeconds(millis) % TimeUnit.MINUTES.toSeconds(1));

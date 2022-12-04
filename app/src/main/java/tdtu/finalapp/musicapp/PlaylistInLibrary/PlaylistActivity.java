@@ -29,8 +29,6 @@ import tdtu.finalapp.musicapp.R;
 import tdtu.finalapp.musicapp.Toast.ToastNotification;
 
 public class PlaylistActivity extends AppCompatActivity {
-    private ImageView backInPlayMusic;
-    private LinearLayout playlistLinear;
     private RecyclerView RecycleViewPlaylist;
     private ArrayList<Playlist> playlistsList =new ArrayList<>();
     private DAOPlaylist dDAOPlaylist =new DAOPlaylist();
@@ -42,8 +40,8 @@ public class PlaylistActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_playlist);
 
-        backInPlayMusic = findViewById(R.id.backInPlayMusic);
-        playlistLinear = findViewById(R.id.playlistLinear);
+        ImageView backInPlayMusic = findViewById(R.id.backInPlayMusic);
+        LinearLayout playlistLinear = findViewById(R.id.playlistLinear);
         RecycleViewPlaylist = findViewById(R.id.RecycleViewPlaylist);
 
         backInPlayMusic.setOnClickListener(v->startActivity(new Intent(PlaylistActivity.this, MainActivity.class)));

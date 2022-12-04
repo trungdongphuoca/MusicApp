@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace 'tdtu.finalapp.musicapp'
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "tdtu.finalapp.musicapp"
         minSdk 29
-        targetSdk 32
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
@@ -34,13 +34,15 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'com.google.android.material:material:1.7.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-
     implementation platform('com.google.firebase:firebase-bom:31.1.0')
-    implementation 'com.google.firebase:firebase-auth'
-    implementation 'com.google.firebase:firebase-database' // cho realtime
+    implementation 'com.google.firebase:firebase-auth:21.1.0'
+    implementation 'com.google.firebase:firebase-database:20.1.0' // cho realtime
 
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
+
+    //Rounded Image View
+    implementation 'com.makeramen:roundedimageview:2.3.0'
 }

@@ -22,12 +22,9 @@ import tdtu.finalapp.musicapp.PlayMusic.MyMediaPlayer;
 import tdtu.finalapp.musicapp.R;
 
 public class DetailPlaylistActivity extends AppCompatActivity {
-    private ImageView backInPlayMusic;
-    private TextView name_playlist;
     private RecyclerView recyclerView;
     private TextView noSong;
     private Playlist passValue_playlist;
-    private List<Song> lstSongOfPlaylist;
 
     ArrayList<Song> SongsArrayList = new ArrayList<>();
 
@@ -36,8 +33,8 @@ public class DetailPlaylistActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_playlist);
 
-        backInPlayMusic = findViewById(R.id.backInPlayMusic);
-        name_playlist = findViewById(R.id.name_playlist);
+        ImageView backInPlayMusic = findViewById(R.id.backInPlayMusic);
+        TextView name_playlist = findViewById(R.id.name_playlist);
         recyclerView = findViewById(R.id.playlistRV);
         noSong = findViewById(R.id.noSong);
 
@@ -49,7 +46,7 @@ public class DetailPlaylistActivity extends AppCompatActivity {
         setSongIntoRecycleView();
     }
     void setSongIntoRecycleView(){
-        lstSongOfPlaylist = passValue_playlist.getListSong();
+        List<Song> lstSongOfPlaylist = passValue_playlist.getListSong();
         if(lstSongOfPlaylist != null){
             noSong.setVisibility(View.GONE);
 
@@ -73,8 +70,4 @@ public class DetailPlaylistActivity extends AppCompatActivity {
             noSong.setVisibility(View.VISIBLE);
         }
     }
-//    public void restartRecycleView(){
-//        playlistsList.clear();
-//        AddPlaylistIntoRecycleView();
-//    }
 }
