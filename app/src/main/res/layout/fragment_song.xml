@@ -35,7 +35,7 @@
            android:layout_height="wrap_content"
            android:layout_below="@+id/songsText"
            android:layout_marginTop="0dp"
-           tools:listitem="@layout/list_songs" />
+           tools:listitem="@layout/list_songs"/>
 
 
    </RelativeLayout>

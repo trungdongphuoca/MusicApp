@@ -22,14 +22,13 @@ import tdtu.finalapp.musicapp.Model.Playlist;
 
 public class DAOPlaylist {
 
-    private FirebaseDatabase db;
     private FirebaseUser currUser;
     private DatabaseReference root ;
 
     private ArrayList<Playlist> playlistsList ; // get all playlist
     public DAOPlaylist(){
         currUser = FirebaseAuth.getInstance().getCurrentUser();
-        db  = FirebaseDatabase.getInstance();
+        FirebaseDatabase db = FirebaseDatabase.getInstance();
         root = db.getReference().child("Playlists").child(currUser.getUid());
 
         playlistsList =new ArrayList<>();

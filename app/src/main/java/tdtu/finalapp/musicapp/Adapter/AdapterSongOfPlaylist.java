@@ -53,17 +53,6 @@ public class AdapterSongOfPlaylist extends RecyclerView.Adapter<AdapterSongOfPla
 
         holder.titleSong.setText(s.getTitle());
 
-//        if(MyMediaPlayer.FakeIndex==position){
-//            System.out.println("hello");
-//            System.out.println(MyMediaPlayer.currentIndex);
-//            System.out.println(MyMediaPlayer.FakeIndex);
-//            holder.titleSong.setTextColor(Color.parseColor("#FFA85CB5"));
-//            MyMediaPlayer.currentIndex = -1;
-//            MyMediaPlayer.FakeIndex = -1;
-//        }else{
-//            holder.titleSong.setTextColor(Color.parseColor("#000000"));
-//        }
-
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

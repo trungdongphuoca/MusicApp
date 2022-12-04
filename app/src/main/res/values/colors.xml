@@ -7,4 +7,10 @@
     <color name="white">#D8D4D4</color>
     <color name="colorButton">#09276B</color>
     <color name="underline">#473E3E</color>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#3F51B5</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorBackground">#F3F3F3</color>
+    <color name="colorStroke">#BDBDBD</color>
+    <color name="colorHint">#ECECEC</color>
 </resources>

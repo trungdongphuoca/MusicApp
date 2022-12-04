@@ -27,12 +27,6 @@ public class LibraryFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    private LinearLayout playlistLinear;
-
     public LibraryFragment() {
         // Required empty public constructor
     }
@@ -59,8 +53,9 @@ public class LibraryFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            // TODO: Rename and change types of parameters
+            String mParam1 = getArguments().getString(ARG_PARAM1);
+            String mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
 
@@ -76,7 +71,7 @@ public class LibraryFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        playlistLinear = view.findViewById(R.id.playlistLinear);
+        LinearLayout playlistLinear = view.findViewById(R.id.playlistLinear);
         playlistLinear.setOnClickListener(v-> startActivity(new Intent(getActivity().getApplicationContext(), PlaylistActivity.class)));
     }
 }
