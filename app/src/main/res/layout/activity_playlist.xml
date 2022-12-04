@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PlaylistInLibrary.PlaylistActivity"
-    android:background="@color/black">
+    tools:context=".PlaylistInLibrary.PlaylistActivity">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -37,7 +36,7 @@
                 android:singleLine="true"
                 android:text="Playlist"
                 android:textAlignment="viewStart"
-                android:textColor="#B5AAAA"
+                android:textColor="@color/black"
                 android:textSize="30dp"
                 android:textStyle="bold" />
 
@@ -65,7 +64,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="8dp"
                 android:text="Playlists"
-                android:textColor="#CFC8C8"
+                android:textColor="@color/black"
                 android:textSize="22dp"
                 android:textStyle="bold" />
 
